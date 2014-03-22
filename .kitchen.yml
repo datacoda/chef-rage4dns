@@ -14,8 +14,10 @@ suites:
       - recipe[rage4dns::default]
       - recipe[rage4dns::dynamic]
     attributes:
+      dev_mode: true
       rage4dns:
         dynamic:
+          refresh_interval: 5
           records:
             foo.example.com: 5555beef
             dyn.example.com: 5555dead

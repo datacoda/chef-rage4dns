@@ -24,3 +24,13 @@ describe file('/etc/rage4dns/ddrage4client.conf') do
   it { should contain 'dyn.example.com=5555dead' }
 end
 
+
+describe file('/etc/cron.d/ddrage4client') do
+  it { should be_file }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
+  it { should_not be_writable.by('others') }
+
+  it { should contain '*/5' }
+  it { should contain '/opt/rage4dns/bin/ddrage4client' }
+end
