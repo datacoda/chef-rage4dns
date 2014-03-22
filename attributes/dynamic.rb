@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rage4dns
-# Attributes:: default
+# Attributes:: dynamic
 #
 # Copyright (C) 2014 Nephila Graphic
 #
@@ -17,6 +17,4 @@
 # limitations under the License.
 #
 
-default['rage4dns']['install_path'] = '/opt/rage4dns'
-default['rage4dns']['config_path'] = '/etc/rage4dns'
-default['rage4dns']['ddrage4client']['path'] = File.join(node['rage4dns']['install_path'], 'bin', 'ddrage4client')
+default['rage4dns']['dynamic']['records'] = {}

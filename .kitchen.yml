@@ -12,4 +12,10 @@ suites:
   - name: rage4dns
     run_list:
       - recipe[rage4dns::default]
+      - recipe[rage4dns::dynamic]
     attributes:
+      rage4dns:
+        dynamic:
+          records:
+            foo.example.com: 5555beef
+            dyn.example.com: 5555dead
