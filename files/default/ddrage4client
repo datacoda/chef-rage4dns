@@ -1,0 +1,92 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import argparse
+import urllib2
+from urllib2 import URLError, HTTPError
+
+# Sample Config File
+# ------------------
+# [resolver]
+# url="http://ifconfig.me/ip"
+#
+# [records]
+# dyn.example.com=55760...73de9
+# dyn.example.net=fc28b5...02093
+
+
+def update_all(conf):
+    import ConfigParser
+
+    print "Reading configuration from file {}".format(conf)
+    config = ConfigParser.ConfigParser()
+    config.read(conf)
+
+    ipresolver = config.get('resolver', 'url').strip("'").strip('"')
+
+
+    print "Contacting reverse DNS resolver {url}...".format(url=ipresolver)
+
+    if not DRY_RUN:
+        req = urllib2.Request(ipresolver)
+        try: response = urllib2.urlopen(req)
+        except HTTPError as e:
+            print e.reason
+            sys.exit(1)
+        except URLError as e:
+            print e.reason
+            sys.exit(1)
+        ipaddress = response.read()
+    else:
+        ipaddress = "127.0.0.1"
+
+    print "IP found %s" % ipaddress
+
+    for name, apikey in config.items('records'):
+        apikey = apikey.strip("'").strip('"')
+        update_record(name, apikey, ipaddress)
+
+
+def update_record(name, apikey, ipaddress):
+    update_cmd = "https://secure.rage4.com/secure/dynamic/{apikey}?ip={ipaddress}".format(
+        apikey=apikey,
+        ipaddress=ipaddress
+    )
+    print "Updating {record}...".format(
+        record=name
+    )
+
+    if not DRY_RUN:
+        req = urllib2.Request(update_cmd)
+        try: response = urllib2.urlopen(req)
+        except HTTPError as e:
+            print "# Record not updated:"
+            print e.reason
+        except URLError as e:
+            print "# Record not updated:"
+            print e.reason
+        else:
+            print response.read()
+    else:
+        print "DRY_RUN: {}".format(update_cmd)
+
+def run():
+    parser = argparse.ArgumentParser(description='Update dynamic entry at Rage4 DNS')
+    parser.add_argument("-c", "--config", help="Configuration file", nargs='?', default="/etc/rage4dns/ddrage4client.conf")
+    parser.add_argument("-n", "--dry-run", help="No updates", action="store_true")
+    args = parser.parse_args()
+
+    global DRY_RUN
+    DRY_RUN = args.dry_run
+
+    # check config file
+    if not os.path.isfile(args.config):
+        print "Invalid configuration file"
+        sys.exit(1)
+
+    update_all(args.config)
+
+
+if __name__ == '__main__':
+    run()
