@@ -17,5 +17,6 @@
 # limitations under the License.
 #
 
+default['rage4dns']['dynamic']['ip_resolver'] = 'http://ifconfig.me/ip'
 default['rage4dns']['dynamic']['refresh_interval'] = 10
 default['rage4dns']['dynamic']['records'] = {}

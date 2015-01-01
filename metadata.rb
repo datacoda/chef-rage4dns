@@ -1,11 +1,11 @@
-name             'rage4dns'
-maintainer       'Nephila Graphic'
+name 'rage4dns'
+maintainer 'Nephila Graphic'
 maintainer_email 'ted@nephilagraphic.com'
-license          'Apache 2.0'
-description      'Installs/Configures rage4dns'
+license 'Apache 2.0'
+description 'Installs/Configures rage4dns'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.0.1'
-
-depends 'cron'
+version '0.0.2'
 
 supports 'ubuntu'
+
+depends 'cron'

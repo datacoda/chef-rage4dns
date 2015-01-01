@@ -3,7 +3,7 @@
 # Recipe:: dynamic
 #
 # Copyright (C) 2014 Nephila Graphic
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,7 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 
 # Script setup
 
@@ -35,7 +34,7 @@ directory bin_path do
   mode 0755
 end
 
-cookbook_file "ddrage4client" do
+cookbook_file 'ddrage4client' do
   user 'root'
   group 'root'
   mode 0754
@@ -45,7 +44,6 @@ end
 link '/usr/sbin/ddrage4client' do
   to ddrage4client_path
 end
-
 
 # Configuration file
 
@@ -61,15 +59,15 @@ template File.join(node['rage4dns']['config_path'], 'ddrage4client.conf') do
   group 'root'
   mode 0600
   variables(
-      :records => node['rage4dns']['dynamic']['records']
+      records: node['rage4dns']['dynamic']['records']
   )
 end
 
-
 # Crontab
+
 include_recipe 'cron'
 cron_d 'ddrage4client' do
-  minute  "*/#{node['rage4dns']['dynamic']['refresh_interval']}"
+  minute "*/#{node['rage4dns']['dynamic']['refresh_interval']}"
   if node['dev_mode']
     command "#{ddrage4client_path} -n"
   else
