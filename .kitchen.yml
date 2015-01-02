@@ -15,9 +15,22 @@ suites:
     attributes:
       dev_mode: true
       rage4dns:
+        rage_access_key_id: '<%= ENV['RAGE_ACCESS_KEY_ID'] %>'
+        rage_secret_access_key: '<%= ENV['RAGE_SECRET_ACCESS_KEY'] %>'
         dynamic:
           ip_resolver: http://test_resolver.me/
           refresh_interval: 5
           records:
             foo.example.com: 5555beef
             dyn.example.com: 5555dead
+
+  - name: apitest
+    run_list:
+      - recipe[rage4dns_record_test::default]
+    attributes:
+      rage4dns:
+        rage_access_key_id: '<%= ENV['RAGE_ACCESS_KEY_ID'] %>'
+        rage_secret_access_key: '<%= ENV['RAGE_SECRET_ACCESS_KEY'] %>'
+      unit_testing:
+        domain: 'example.com'
+        action: 'create'

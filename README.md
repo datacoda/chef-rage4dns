@@ -1,5 +1,7 @@
 rage4dns cookbook
 -----------------
+[![Build Status](https://travis-ci.org/nephilagraphic-cookbooks/rage4dns.svg)](https://travis-ci.org/nephilagraphic-cookbooks/rage4dns)
+
 This cookbook provides libraries, resources and providers to configure and manage Rage4 DNS
 
 Tested on
@@ -44,6 +46,28 @@ Installs a dynamic DNS updater with cron.  Specify apikeys in `['rage4dns']['dyn
 
 Resources/Providers
 -------------------
+
+### rage4dns_record
+
+```ruby
+rage4dns_record 'test-europe' do
+  record_name 'test'
+  domain 'example.com'
+
+  type 'A'
+  value '16.8.4.3'
+
+  rage_access_key_id 'email@example.com'
+  rage_secret_access_key '1234abcd'
+
+  geozone 'Europe'
+
+  failover true
+  failover_content '127.0.0.11'
+
+  action :create
+end
+```
 
 
 License & Authors
