@@ -16,6 +16,16 @@ LineLength:
 # HashSyntax:
 #  EnforcedStyle: hash_rockets
 
+# avoid parameter lists longer than 5 parameters.
+ParameterLists:
+  Max: 5
+  CountKeywordArgs: false
+  Enabled: true
+
+# Use next to skip iteration.
+Style/Next:
+  Enabled: false
+
 Documentation:
   Enabled: false
 
