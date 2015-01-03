@@ -1,6 +1,6 @@
 rage4dns cookbook
 -----------------
-[![Build Status](https://travis-ci.org/nephilagraphic-cookbooks/rage4dns.svg)](https://travis-ci.org/nephilagraphic-cookbooks/rage4dns)
+[![Build Status](https://travis-ci.org/dataferret/chef-rage4dns.svg)](https://travis-ci.org/dataferret/chef-rage4dns)
 
 This cookbook provides libraries, resources and providers to configure and manage Rage4 DNS
 
