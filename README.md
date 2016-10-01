@@ -1,6 +1,6 @@
 rage4dns cookbook
 -----------------
-[![Build Status](https://travis-ci.org/dataferret/chef-rage4dns.svg)](https://travis-ci.org/dataferret/chef-rage4dns)
+[![Build Status](https://travis-ci.org/datacoda/chef-rage4dns.svg)](https://travis-ci.org/datacoda/chef-rage4dns)
 
 This cookbook provides libraries, resources and providers to configure and manage Rage4 DNS
 
@@ -72,7 +72,7 @@ end
 
 License & Authors
 -----------------
-- Author:: Ted Chen (<ted@nephilagraphic.com>)
+- Author:: Li-Te Chen (<datacoda@gmail.com>)
 
 ```text
 Copyright 2014, Nephila Graphic
